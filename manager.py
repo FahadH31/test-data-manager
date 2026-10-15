@@ -38,8 +38,8 @@ PLANNED_IDS = {"TC-101", "TC-102", "TC-103", "TC-104", "TC-105", "TC-106",
 # PART 1 - Look at the raw data (slicing)
 # ===========================================================================
 raw_ids = []                 # TODO 1a: loop over RAW_TEST_CASES, append each case's "id"
-for row in RAW_TEST_CASES:
-    raw_ids.append(row["id"])
+for case in RAW_TEST_CASES:
+    raw_ids.append(case["id"])
 
 first_three_ids = raw_ids[:3]        # TODO 1b: slice of raw_ids: the first 3 IDs
 last_two_ids = raw_ids[-2:]          # TODO 1c: slice of raw_ids: the last 2 IDs (negative index)
@@ -57,9 +57,14 @@ seen_ids = set()
 unique_cases = []
 # TODO 2: for each case in RAW_TEST_CASES, if its id is not in seen_ids,
 #         add the id to seen_ids and append the case to unique_cases.
-unique_cases = None          # TODO 2 (delete this line once your loop works)
+for case in RAW_TEST_CASES:
+    if (case["id"] in seen_ids) == False:
+        seen_ids.add(case["id"])
+        unique_cases.append(case["id"])
 
 print("Unique cases:", unique_cases)
+print(f"Unique cases length: {len(unique_cases)}")
+print(f"Raw records: {len(RAW_TEST_CASES)}")
 
 # ===========================================================================
 # PART 3 - Group by module (defaultdict)
