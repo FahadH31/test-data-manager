@@ -60,7 +60,7 @@ unique_cases = []
 for case in RAW_TEST_CASES:
     if (case["id"] in seen_ids) == False:
         seen_ids.add(case["id"])
-        unique_cases.append(case["id"])
+        unique_cases.append(case)
 
 print("Unique cases:", unique_cases)
 print(f"Unique cases length: {len(unique_cases)}")
@@ -70,8 +70,10 @@ print(f"Raw records: {len(RAW_TEST_CASES)}")
 # PART 3 - Group by module (defaultdict)
 # Result shape: {"login": ["TC-101", "TC-102", ...], "search": [...], ...}
 # ===========================================================================
-ids_by_module = None         # TODO 3a: create a defaultdict(list)
+ids_by_module = defaultdict(list)         # TODO 3a: create a defaultdict(list)
 # TODO 3b: loop over unique_cases and append each case's id under its module
+for case in unique_cases:
+    ids_by_module[case["module"]].append(case["id"])
 
 print("By module   :", ids_by_module)
 
