@@ -93,10 +93,18 @@ print("TC-999      :", missing_case)
 # ===========================================================================
 # PART 5 - Counts by status (Counter) and planned-vs-executed (sets)
 # ===========================================================================
-status_counts = None         # TODO 5a: Counter of statuses over unique_cases;
-                             #          a case with no "status" counts as "unknown" (hint: .get)
-executed_ids = None          # TODO 5b: SET of ids of unique cases that HAVE a "status"
-not_run_ids = None           # TODO 5c: SORTED LIST of IDs in PLANNED_IDS that are not in executed_ids
+status_counts = Counter()         # TODO 5a: Counter of statuses over unique_cases; a case with no "status" counts as "unknown" (hint: .get)
+for case in unique_cases:
+    status_counts[case.get("status", "unknown")] += 1  # Counter of all status types
+
+# need a list of the IDS of unique cases that have a status
+executed_ids = set()            # TODO 5b: SET of ids of unique cases that HAVE a "status"
+for case in unique_cases:
+    if (case.get("status") != None):
+        executed_ids.add(case["id"])
+print(f"Executed IDs: {executed_ids}")
+
+not_run_ids = sorted(PLANNED_IDS-executed_ids)              # TODO 5c: SORTED LIST of IDs in PLANNED_IDS that are not in executed_ids
 
 print("By status   :", status_counts)
 print("Not run     :", not_run_ids)
